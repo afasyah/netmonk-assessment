@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Outlet } from 'react-router-dom';
+import Experience from '@/core/classes/Experience/Experience';
 
 import Navbar from '@/layouts/Navbar';
 
-export const App = () => (
-   <div className="App">
-      <Navbar />
+export const App = () => {
+   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-      <div className="main-content">
-         <Outlet />
+   useEffect(() => {
+      const experience = new Experience(canvasRef.current);
+   }, []);
+
+   return (
+      <div className="App">
+         <Navbar />
+
+         <div className="main-content">
+            <canvas ref={canvasRef}></canvas>
+
+            <Outlet />
+         </div>
       </div>
-   </div>
-);
+   );
+};
 
 export default App;
