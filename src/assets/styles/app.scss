@@ -25,7 +25,7 @@ body
    top: 0;
    left: 0;
    outline: none;
-   // z-index: -999;
+   z-index: -999;
 }
 
 .loading-overlay {
@@ -162,6 +162,7 @@ button,
    align-items: center;
    justify-content: space-around;
    width: 100%;
+   // height: calc(25vh - 64px);
 
    &__title {
       font-size: 42px;

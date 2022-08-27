@@ -1,8 +1,6 @@
 import React from 'react';
 
-import Home from '../Home';
-
-export const MainPage = () => {
+export const MainPage = ({ children }: React.PropsWithChildren) => {
    return (
       <div className="main-content">
          <div className="main-content__navigation">
@@ -12,13 +10,7 @@ export const MainPage = () => {
             </button>
          </div>
 
-         <div className="main-content__page">
-            <div className="main-content__page-1">
-               <Home />
-            </div>
-            <div className="main-content__page-2"></div>
-            <div className="main-content__page-3"></div>
-         </div>
+         <div className="main-content__page">{children}</div>
       </div>
    );
 };
