@@ -1,14 +1,14 @@
 import {
-   eventNameIdentification,
-   eventEmitterMethods,
-} from '../ts/interfaces/ClassInterfaces';
+   EventNameIdentification,
+   EventEmitterMethods,
+} from '@/core/ts/interfaces/ClassInterfaces';
 
 /*
  *  Serves as a Event Initiator for every class so each of them will be updated accordingly.
  *  @constructor
  *    | callbacks: any
  */
-export class EventEmitter implements eventEmitterMethods {
+export class EventEmitter implements EventEmitterMethods {
    public callbacks: any;
 
    constructor() {
@@ -121,7 +121,7 @@ export class EventEmitter implements eventEmitterMethods {
       const args = !(_args instanceof Array) ? [] : _args;
 
       // Resolve names (should on have one event)
-      let name: string[] | string | eventNameIdentification =
+      let name: string[] | string | EventNameIdentification =
          this.resolveNames(_name);
 
       // Resolve name
@@ -177,7 +177,7 @@ export class EventEmitter implements eventEmitterMethods {
    }
 
    resolveName(name: string) {
-      const newName: eventNameIdentification = {
+      const newName: EventNameIdentification = {
          original: '',
          value: '',
          namespace: '',

@@ -27,20 +27,15 @@ export class Renderer {
       this.sizes = this.experience.sizes;
       this.scene = this.experience.scene;
       this.camera = this.experience.camera;
-      this.instance = null;
 
       this.setInstance();
-   }
-
-   resize() {
-      this.instance.setSize(this.sizes.width, this.sizes.height);
-      this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2));
    }
 
    setInstance() {
       this.instance = new THREE.WebGLRenderer({
          canvas: this.canvas,
          antialias: true,
+         // alpha: true,
       });
       this.instance.physicallyCorrectLights = true;
       this.instance.outputEncoding = THREE.sRGBEncoding;
@@ -52,8 +47,13 @@ export class Renderer {
       this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2));
    }
 
+   resize() {
+      this.instance.setSize(this.sizes.width, this.sizes.height);
+      this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2));
+   }
+
    update() {
-      this.instance.render(this.scene, this.camera.instance);
+      this.instance.render(this.scene, this.camera.perspectiveCamera);
    }
 }
 

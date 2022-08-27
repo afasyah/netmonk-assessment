@@ -13,12 +13,12 @@ export const App = () => {
 
    return (
       <div className="App">
-         <Navbar />
+         {/* <Navbar /> */}
 
          <div className="main-content">
-            <canvas ref={canvasRef}></canvas>
+            <canvas ref={canvasRef} className="webgl"></canvas>
 
-            <Outlet />
+            {/* <Outlet /> */}
          </div>
       </div>
    );
