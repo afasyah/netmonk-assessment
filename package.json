@@ -6,7 +6,11 @@
     "build": "webpack --config ./bundler/webpack.prod.js",
     "dev": "webpack serve --config ./bundler/webpack.dev.js"
   },
-  "author": "Alifya Difa Afasyah",
+  "author": {
+    "name": "Alifya Difa Afasyah",
+    "email": "alifya.difa707@gmail.com",
+    "url": "https://www.linkedin.com/in/adafasyah/"
+  },
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",

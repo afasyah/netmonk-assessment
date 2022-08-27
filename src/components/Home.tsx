@@ -2,17 +2,19 @@ import React from 'react';
 
 export const Home = () => {
    return (
-      <div className="home__wrapper">
-         <div className="home__content">
-            <h2 className="home__title">
+      <div className="content__wrapper">
+         <div className="content">
+            <h2 className="content__title">
                BOOK YOUR ULTIMATE SUSHI EXPERIENCE!
             </h2>
-            <p className="home__subtitle">Save 50% on your first visit*</p>
-            <p className="home__mini-subtitle">*Terms & condition applied.</p>
+            <p className="content__subtitle">Save 50% on your first visit*</p>
+            <p className="content__mini-subtitle">
+               *Terms & condition applied.
+            </p>
          </div>
 
-         <div className="home__actions">
-            <button className="button button__primary button--large">
+         <div className="content__actions">
+            <button className="button button--color-primary button--large">
                Book Now
             </button>
          </div>
