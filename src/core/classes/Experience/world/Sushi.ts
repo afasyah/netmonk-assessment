@@ -25,8 +25,8 @@ export class Sushi {
       this.resource = this.resources.items.Sushi;
 
       this.lerp = {
-         current: 0,
-         target: 0,
+         current: Math.PI * 0.5,
+         target: Math.PI * 0.25,
          ease: 0.1,
       };
 
@@ -37,7 +37,7 @@ export class Sushi {
    setModel() {
       this.model = this.resource.scene;
       this.model.scale.set(0.5, 0.5, 0.5);
-      this.model.rotation.y = Math.PI * 0.25;
+      // this.model.rotation.y = Math.PI * 0.25;
       this.scene.add(this.model);
 
       this.model.traverse((child) => {
@@ -51,7 +51,9 @@ export class Sushi {
    onMouseMove() {
       window.addEventListener('mousemove', (e) => {
          this.rotation =
-            ((e.clientX - window.innerWidth / 2) * 0.5) / window.innerWidth;
+            ((e.clientX - window.innerWidth / 2) * 0.5) / window.innerWidth +
+            Math.PI * 0.25;
+
          this.lerp.target = this.rotation;
       });
    }
@@ -64,7 +66,6 @@ export class Sushi {
       );
 
       this.model.rotation.y = this.lerp.current;
-      console.log(this.model.rotation);
    }
 }
 

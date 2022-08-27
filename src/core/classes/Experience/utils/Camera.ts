@@ -57,6 +57,7 @@ export class Camera {
          -8,
          8,
       );
+      this.orthographicCamera.rotation.x = -Math.PI / 6;
       this.scene.add(this.orthographicCamera);
 
       this.orthographicCameraHelper = new THREE.CameraHelper(
