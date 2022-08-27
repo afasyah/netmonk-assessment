@@ -1,10 +1,12 @@
 import * as THREE from 'three';
+// import { gsap } from 'gsap';
 
 import Experience from '../Experience';
 import Resources from '../utils/Resources';
 import Environment from '../utils/Environment';
 import Sushi from '../world/Sushi';
 import Floor from '../world/Floor';
+import Overlay from '../world/Overlay';
 import Controls from '../utils/Controls';
 
 /*
@@ -22,19 +24,29 @@ export class World {
    private sushi: Sushi;
    private floor: Floor;
    private controls: Controls;
+   private overlay: Overlay;
 
    constructor() {
       this.experience = new Experience();
       this.scene = this.experience.scene;
       this.resources = this.experience.resources;
+      // this.overlay = new Overlay();
 
       // Wait for resources
       this.resources.on('ready', () => {
+         // gsap.to(this.overlay.shaderMaterial.uniforms.uAlpha, {
+         //    duration: 2,
+         //    value: 0,
+         // });
+
          // Setup
-         this.environment = new Environment();
-         this.sushi = new Sushi();
-         this.floor = new Floor();
-         this.controls = new Controls();
+         window.setTimeout(() => {
+            this.environment = new Environment();
+            this.sushi = new Sushi();
+            this.floor = new Floor();
+            this.controls = new Controls();
+            window.dispatchEvent(new CustomEvent('asset-loaded'));
+         }, 0);
       });
    }
 

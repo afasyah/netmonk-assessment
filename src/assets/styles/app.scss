@@ -1,4 +1,5 @@
 @import "variables";
+@import "spinner";
 
 *
 {
@@ -24,7 +25,23 @@ body
    top: 0;
    left: 0;
    outline: none;
-   z-index: -999;
+   // z-index: -999;
+}
+
+.loading-overlay {
+   position: fixed;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   gap: 24px;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100vh;
+   background-color: $color-primary;
+   transition: 250ms ease-in-out all;
+   color: white;
 }
 
 a {
