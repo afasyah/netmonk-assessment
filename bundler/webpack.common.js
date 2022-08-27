@@ -1,4 +1,6 @@
-
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable no-undef */
+/* eslint-disable prettier/prettier */
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin');

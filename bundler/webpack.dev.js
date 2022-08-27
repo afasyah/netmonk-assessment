@@ -1,4 +1,8 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable no-undef */
+/* eslint-disable prettier/prettier */
 const path = require('path')
+const { DefinePlugin } = require('webpack')
 const { merge } = require('webpack-merge')
 const commonConfiguration = require('./webpack.common.js')
 const ip = require('ip')
@@ -18,7 +22,7 @@ module.exports = merge(
       {
          level: 'warn',
       },
-         devServer:
+      devServer:
       {
          host: 'local-ip',
          port: portFinderSync.getPort(8080),
@@ -48,6 +52,16 @@ module.exports = merge(
             
             console.log(`Project running at:\n  - ${infoColor(domain1)}\n  - ${infoColor(domain2)}`)
          }
-      }
-   }
+      },
+      plugins:
+      [
+         new DefinePlugin({
+            'process.env':
+            {
+               'NODE_ENV': JSON.stringify('development'),
+               'API_URL': JSON.stringify('https://jsonplaceholder.typicode.com')
+            }
+         }),
+      ]
+   },
 )
