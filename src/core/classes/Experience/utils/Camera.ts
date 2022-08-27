@@ -57,22 +57,24 @@ export class Camera {
          -8,
          8,
       );
-      this.orthographicCamera.rotation.x = -Math.PI / 6;
+      this.orthographicCamera.position.x = -3.2;
+      this.orthographicCamera.position.y = 0.5;
+      this.orthographicCamera.rotation.x = -Math.PI / 7;
       this.scene.add(this.orthographicCamera);
 
-      this.orthographicCameraHelper = new THREE.CameraHelper(
-         this.orthographicCamera,
-      );
-      this.scene.add(this.orthographicCameraHelper);
+      // this.orthographicCameraHelper = new THREE.CameraHelper(
+      //    this.orthographicCamera,
+      // );
+      // this.scene.add(this.orthographicCameraHelper);
 
-      const size = 20;
-      const divisions = 20;
+      // const size = 20;
+      // const divisions = 20;
 
-      const gridHelper = new THREE.GridHelper(size, divisions);
-      this.scene.add(gridHelper);
+      // const gridHelper = new THREE.GridHelper(size, divisions);
+      // this.scene.add(gridHelper);
 
-      const axesHelper = new THREE.AxesHelper(5);
-      this.scene.add(axesHelper);
+      // const axesHelper = new THREE.AxesHelper(5);
+      // this.scene.add(axesHelper);
    }
 
    createPerspectiveCamera() {
@@ -107,18 +109,18 @@ export class Camera {
    update() {
       this.controls.update();
 
-      this.orthographicCameraHelper.matrixWorldNeedsUpdate = true;
-      this.orthographicCameraHelper.update();
-      this.orthographicCameraHelper.position.copy(
-         this.orthographicCamera.position,
-      );
-      this.orthographicCameraHelper.rotation.copy(
-         new THREE.Euler(
-            this.orthographicCamera.position.x,
-            this.orthographicCamera.position.y,
-            this.orthographicCamera.position.z,
-         ),
-      );
+      // this.orthographicCameraHelper.matrixWorldNeedsUpdate = true;
+      // this.orthographicCameraHelper.update();
+      // this.orthographicCameraHelper.position.copy(
+      //    this.orthographicCamera.position,
+      // );
+      // this.orthographicCameraHelper.rotation.copy(
+      //    new THREE.Euler(
+      //       this.orthographicCamera.position.x,
+      //       this.orthographicCamera.position.y,
+      //       this.orthographicCamera.position.z,
+      //    ),
+      // );
    }
 }
 

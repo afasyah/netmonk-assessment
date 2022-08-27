@@ -37,7 +37,7 @@ export class Controls {
 
       // Create the final object to add to the scene
       const curveObject = new THREE.Line(geometry, material);
-      this.scene.add(curveObject);
+      // this.scene.add(curveObject);
    }
 
    update() {

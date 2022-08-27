@@ -4,6 +4,7 @@ import Experience from '../Experience';
 import Resources from '../utils/Resources';
 import Environment from '../utils/Environment';
 import Sushi from '../world/Sushi';
+import Floor from '../world/Floor';
 import Controls from '../utils/Controls';
 
 /*
@@ -19,6 +20,7 @@ export class World {
    private resources: Resources;
    private environment: Environment;
    private sushi: Sushi;
+   private floor: Floor;
    private controls: Controls;
 
    constructor() {
@@ -31,6 +33,7 @@ export class World {
          // Setup
          this.environment = new Environment();
          this.sushi = new Sushi();
+         this.floor = new Floor();
          this.controls = new Controls();
       });
    }

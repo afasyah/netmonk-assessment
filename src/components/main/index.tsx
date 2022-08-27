@@ -1,5 +1,17 @@
 import React from 'react';
 
-export const Navbar = () => <h1>Hello World!</h1>;
+import Home from '../Home';
 
-export default Navbar;
+export const MainPage = () => {
+   return (
+      <div className="main-content__page">
+         <div className="main-content__page-1">
+            <Home />
+         </div>
+         <div className="main-content__page-2"></div>
+         <div className="main-content__page-3"></div>
+      </div>
+   );
+};
+
+export default MainPage;

@@ -59,8 +59,8 @@ export default class Environment {
       // const helper = new THREE.CameraHelper(this.sunLight.shadow.camera);
       // this.scene.add(helper);
 
-      const helper = new THREE.DirectionalLightHelper(this.sunLight, 1);
-      this.scene.add(helper);
+      // const helper = new THREE.DirectionalLightHelper(this.sunLight, 1);
+      // this.scene.add(helper);
    }
 
    setAmbientLight() {

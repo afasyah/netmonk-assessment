@@ -36,7 +36,7 @@ export class Sushi {
 
    setModel() {
       this.model = this.resource.scene;
-      this.model.scale.set(0.5, 0.5, 0.5);
+      this.model.scale.set(0.32, 0.32, 0.32);
       // this.model.rotation.y = Math.PI * 0.25;
       this.scene.add(this.model);
 

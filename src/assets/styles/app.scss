@@ -5,16 +5,18 @@
    box-sizing: border-box;
 }
 
-// html,
-// body
-// {
-//    overflow: hidden;
-// }
+html,
+body
+{
+   font-family: 'Poppins', sans-serif;
+   overflow: hidden;
+}
 
-// .webgl
-// {
-//    position: fixed;
-//    top: 0;
-//    left: 0;
-//    outline: none;
-// }
+.webgl
+{
+   position: fixed;
+   top: 0;
+   left: 0;
+   outline: none;
+   z-index: -999;
+}

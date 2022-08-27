@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Experience from '@/core/classes/Experience/Experience';
 
 import Navbar from '@/layouts/Navbar';
+import Footer from '@/layouts/Footer';
 
 export const App = () => {
    const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -13,13 +14,15 @@ export const App = () => {
 
    return (
       <div className="App">
-         {/* <Navbar /> */}
+         <Navbar />
 
          <div className="main-content">
             <canvas ref={canvasRef} className="webgl"></canvas>
 
-            {/* <Outlet /> */}
+            <Outlet />
          </div>
+
+         <Footer />
       </div>
    );
 };
