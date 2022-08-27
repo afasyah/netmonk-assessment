@@ -39,6 +39,10 @@ export class Controls {
       const curveObject = new THREE.Line(geometry, material);
       this.scene.add(curveObject);
    }
+
+   update() {
+      //
+   }
 }
 
 export default Controls;

@@ -28,6 +28,7 @@ export class Camera {
       | OrthographicCameraInterface
       | null;
    public orthographicCamera: OrthographicCameraInterface;
+   public orthographicCameraHelper: THREE.CameraHelper;
    public perspectiveCamera: PerspectiveCameraInterface;
 
    constructor() {
@@ -53,13 +54,18 @@ export class Camera {
          (this.sizes.aspect * this.sizes.frustum) / 2,
          this.sizes.frustum / 2,
          -this.sizes.frustum / 2,
-         -100,
-         100,
+         -8,
+         8,
       );
       this.scene.add(this.orthographicCamera);
 
-      const size = 10;
-      const divisions = 10;
+      this.orthographicCameraHelper = new THREE.CameraHelper(
+         this.orthographicCamera,
+      );
+      this.scene.add(this.orthographicCameraHelper);
+
+      const size = 20;
+      const divisions = 20;
 
       const gridHelper = new THREE.GridHelper(size, divisions);
       this.scene.add(gridHelper);
@@ -99,6 +105,19 @@ export class Camera {
 
    update() {
       this.controls.update();
+
+      this.orthographicCameraHelper.matrixWorldNeedsUpdate = true;
+      this.orthographicCameraHelper.update();
+      this.orthographicCameraHelper.position.copy(
+         this.orthographicCamera.position,
+      );
+      this.orthographicCameraHelper.rotation.copy(
+         new THREE.Euler(
+            this.orthographicCamera.position.x,
+            this.orthographicCamera.position.y,
+            this.orthographicCamera.position.z,
+         ),
+      );
    }
 }
 

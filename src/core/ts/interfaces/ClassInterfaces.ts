@@ -2,6 +2,12 @@ import EventEmitter from '../../classes/EventEmitter';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 
+export interface LerpInterface {
+   current: number;
+   target: number;
+   ease: number;
+}
+
 export interface ResourceLoader {
    gltfLoader: GLTFLoader;
    dracoLoader: DRACOLoader;

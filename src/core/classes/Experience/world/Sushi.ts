@@ -1,7 +1,11 @@
 import * as THREE from 'three';
+import GSAP from 'gsap';
+
 import Experience from '../Experience';
 import Resources from '../utils/Resources';
 import Camera from '../utils/Camera';
+
+import { LerpInterface } from '@/core/ts/interfaces/ClassInterfaces';
 
 export class Sushi {
    private experience: Experience;
@@ -10,6 +14,8 @@ export class Sushi {
    private resource: any;
    private model: THREE.Scene;
    private camera: Camera;
+   private rotation: number;
+   public lerp: LerpInterface;
 
    constructor() {
       this.experience = new Experience();
@@ -18,13 +24,20 @@ export class Sushi {
       this.resources = this.experience.resources;
       this.resource = this.resources.items.Sushi;
 
+      this.lerp = {
+         current: 0,
+         target: 0,
+         ease: 0.1,
+      };
+
       this.setModel();
+      this.onMouseMove();
    }
 
    setModel() {
       this.model = this.resource.scene;
       this.model.scale.set(0.5, 0.5, 0.5);
-      this.model.rotation.y = Math.PI * 0.5;
+      this.model.rotation.y = Math.PI * 0.25;
       this.scene.add(this.model);
 
       this.model.traverse((child) => {
@@ -33,6 +46,25 @@ export class Sushi {
             child.receiveShadow = true;
          }
       });
+   }
+
+   onMouseMove() {
+      window.addEventListener('mousemove', (e) => {
+         this.rotation =
+            ((e.clientX - window.innerWidth / 2) * 0.5) / window.innerWidth;
+         this.lerp.target = this.rotation;
+      });
+   }
+
+   update() {
+      this.lerp.current = GSAP.utils.interpolate(
+         this.lerp.current,
+         this.lerp.target,
+         this.lerp.ease,
+      );
+
+      this.model.rotation.y = this.lerp.current;
+      console.log(this.model.rotation);
    }
 }
 
