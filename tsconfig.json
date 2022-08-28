@@ -15,7 +15,8 @@
          "Assets/*": ["src/assets/*"],
          "Components/*": ["src/components/*"],
          "Core/*": ["src/core/*"],
-         "Utilities/*": ["src/utilities/*"]
+         "Utilities/*": ["src/utilities/*"],
+         "Views/*": ["src/views/*"]
       }
    },
    "include": [

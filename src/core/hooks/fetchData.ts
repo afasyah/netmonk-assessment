@@ -23,8 +23,6 @@ const fetchData = (url: string) => {
                setError(error);
             }
          });
-
-      return () => abortCont.abort();
    }, [url]);
 
    return { data, error, loading };

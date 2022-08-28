@@ -1,9 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 import { MOTION_CONTAINER, MOTION_ITEM } from '../utilities/constant';
 
 export const Home = () => {
+   const navigate = useNavigate();
+
    return (
       <div className="content__wrapper">
          <motion.div
@@ -28,7 +31,8 @@ export const Home = () => {
             <div className="content__actions">
                <motion.button
                   variants={MOTION_ITEM}
-                  className="button button--color-primary button--large">
+                  className="button button--color-primary button--large"
+                  onClick={() => navigate('/booking')}>
                   Book Now
                </motion.button>
             </div>

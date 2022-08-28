@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 
 import '@/assets/styles/app.scss';
 
 import App from '@/App';
-import MainContent from '@/components/main';
-import FirstPage from '@/components/pages/1';
+import MainPage from '@/views';
+import BookingList from '@/views/booking';
+import Booking from '@/views/booking/_id';
 
 const el: HTMLElement | null = document.getElementById('root');
 const root = ReactDOM.createRoot(el);
@@ -16,14 +17,9 @@ root.render(
       <Router>
          <Routes>
             <Route path="/" element={<App />}>
-               <Route
-                  path=""
-                  element={
-                     <MainContent>
-                        <FirstPage />
-                     </MainContent>
-                  }></Route>
-               <Route path="booking" element={<MainContent />}></Route>
+               <Route path="" element={<MainPage />}></Route>
+               <Route path="booking" element={<BookingList />}></Route>
+               <Route path="booking/:id" element={<Booking />}></Route>
             </Route>
          </Routes>
       </Router>
