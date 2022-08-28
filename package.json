@@ -6,12 +6,20 @@
     "build": "webpack --config ./bundler/webpack.prod.js",
     "dev": "webpack serve --config ./bundler/webpack.dev.js"
   },
-  "author": "Alifya Difa Afasyah",
+  "author": {
+    "name": "Alifya Difa Afasyah",
+    "email": "alifya.difa707@gmail.com",
+    "url": "https://www.linkedin.com/in/adafasyah/"
+  },
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.27.2",
+    "framer-motion": "^7.2.1",
+    "gsap": "^3.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "three": "^0.143.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
@@ -26,6 +34,7 @@
     "@typescript-eslint/eslint-plugin": "^5.35.1",
     "@typescript-eslint/parser": "^5.35.1",
     "babel-loader": "^8.2.5",
+    "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
     "eslint": "^8.22.0",

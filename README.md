@@ -6,11 +6,12 @@ This project was intended to be Alifya Difa Afasyah technical assessment's.
 Made with React + TypeScript and bundled beautifully using Webpack.
 
 Used dependencies version :
-react:  "^18.2.0"
-react-dom:  "^18.2.0"
-react-router-dom:  "^6.3.0"
-typescript:  "^4.8.2"
-webpack:  "^5.74.0"
+three: "^0.143.0"/
+react:  "^18.2.0"/
+react-dom:  "^18.2.0"/
+react-router-dom:  "^6.3.0"/
+typescript:  "^4.8.2"/
+webpack:  "^5.74.0"/
 
 ## Available Scripts
 
