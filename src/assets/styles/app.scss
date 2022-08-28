@@ -114,6 +114,7 @@ button,
       padding: 24px 32px;
       padding-top: 128px;
       max-width: 50%;
+      min-width: 50%;
    }
 
    &__page {
@@ -142,6 +143,19 @@ button,
 .content {
    margin-bottom: 42px;
 
+   &.detail {
+      margin-bottom: 24px;
+      max-width: 520px;
+   }
+
+   &__wrapper {
+      &.detail {
+         .post {
+            max-width: 520px;
+         }
+      }
+   }
+
    &__title {
       font-size: 38px;
       font-weight: 700;
@@ -156,6 +170,20 @@ button,
 
    &__mini-subtitle {
       font-size: 12px;
+   }
+
+   &__profile {
+      display: flex;
+      justify-content: space-between;
+
+      img {
+         margin-left: 24px;
+         border-radius: 999px;
+      }
+
+      p {
+         font-size: 14px;
+      }
    }
 }
 
@@ -246,6 +274,10 @@ button,
          top: 0;
          left: 362px;
       }
+   }
+
+   &__body {
+      text-align: justify;
    }
 }
 

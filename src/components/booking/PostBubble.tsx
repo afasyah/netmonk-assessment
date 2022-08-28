@@ -41,7 +41,7 @@ export const PostBubble = ({ post, user }: PostBubblePropInterface) => {
          onMouseEnter={(_e) => toggleHover(_e, true)}
          onMouseLeave={(_e) => toggleHover(_e, false)}>
          <img
-            src={`/images/pp-${user.id > 5 ? 5 : user.id}.png`}
+            src={`/images/pp-${user.id}.png`}
             alt="pp"
             width={64}
             className="post-bubble__image"

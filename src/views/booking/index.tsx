@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-import { MOTION_CONTAINER, MOTION_ITEM } from '../../utilities/constant';
+import { MOTION_CONTAINER, MOTION_ITEM } from '@/utilities/constant';
 import fetchData from '@/core/hooks/fetchData';
 import { API } from '@/utilities/constant';
 import {
