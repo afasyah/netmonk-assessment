@@ -99,7 +99,7 @@ export const BookingList = () => {
                </div>
             </motion.div>
 
-            <div className="post">
+            <div className="post booking-list">
                {postError && postError}
                {userError && userError}
                {posts && users && (
