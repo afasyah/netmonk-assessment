@@ -263,6 +263,10 @@ button,
 .post {
    position: relative;
 
+   &.booking-list {
+      height: 200px;
+   }
+
    &-bubble {
       position: absolute;
 
@@ -377,6 +381,9 @@ button,
       box-shadow: 0px 11px 39px -6px rgba(36, 36, 36, 0.25);
       padding: 24px 32px;
       width: 420px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: 350px;
 
       &--active {
          &.modal__booking-wrapper {
@@ -387,7 +394,7 @@ button,
       }
 
       &-wrapper {
-         position: absolute;
+         position: fixed;
          z-index: 99999;
          left: calc(50% - 80px);
          bottom: -50vh;
@@ -398,12 +405,12 @@ button,
 
       .close-button {
          position: absolute;
-         top: -20px;
-         right: -12px;
          border-radius: 999px;
-         background-color: #fff;
          padding: 16px;
-         box-shadow: 0px 11px 39px -6px rgba(36, 36, 36, 0.25);
+         top: 8px;
+         right: 6px;
+         background-color: transparent;
+         box-shadow: unset;
       }
    }
 
@@ -453,6 +460,33 @@ button,
             outline: 2px solid $color-primary;
          }
       }
+   }
+}
+
+@media screen and(min-height: 720px) {
+   .modal {
+      &__booking {
+         height: auto;
+         overflow-y: unset;
+         overflow-x: unset;
+
+         .close-button {
+            top: -20px;
+            right: -12px;
+            background-color: #fff;
+            box-shadow: 0px 11px 39px -6px rgba(36, 36, 36, 0.25);
+         }
+      }
+   }
+
+   .close-button {
+      position: absolute;
+      top: 8px;
+      right: 6px;
+      border-radius: 999px;
+      // background-color: #fff;
+      padding: 16px;
+      // box-shadow: 0px 11px 39px -6px rgba(36, 36, 36, 0.25);
    }
 }
 
