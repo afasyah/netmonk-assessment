@@ -11,7 +11,7 @@ export interface UserInterface {
    name: string;
    username: string;
    email: string;
-   address: {
+   address?: {
       street: string;
       suite: string;
       city: string;
@@ -23,7 +23,7 @@ export interface UserInterface {
    };
    phone: string;
    website: string;
-   company: {
+   company?: {
       name: string;
       catchPhrase: string;
       bs: string;

@@ -6,6 +6,7 @@
    margin: 0;
    padding: 0;
    box-sizing: border-box;
+   color: $color-text;
 }
 
 html,
@@ -80,6 +81,17 @@ button,
    &--color-primary {
       background-color: $color-primary;
       color: #fff;
+
+      &.button--outlined {
+         color: $color-primary;
+         border: 2px solid $color-primary;
+         background-color: rgba($color: #fff, $alpha: 0.8);
+      }
+   }
+
+   &--color-danger {
+      background-color: $color-danger;
+      color: #fff;
    }
 
    &--large {
@@ -91,6 +103,11 @@ button,
       text-align: center;
       justify-content: center;
       padding: 8px 12px;
+   }
+
+   &:disabled {
+      background-color: $color-gray;
+      color: #fff;
    }
 }
 
@@ -273,6 +290,10 @@ button,
             margin-bottom: 8px;
          }
 
+         &-overview {
+            height: 75px;
+         }
+
          &-actions {
             display: flex;
             justify-content: flex-end;
@@ -298,6 +319,11 @@ button,
       &--order-5 {
          top: 0;
          left: 362px;
+      }
+
+      &--order-6 {
+         top: 84px;
+         left: 464px;
       }
    }
 

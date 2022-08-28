@@ -5,6 +5,7 @@ import axios from '@/core/services/axios';
 
 import { API } from '@/utilities/constant';
 import { MOTION_CONTAINER, MOTION_ITEM } from '@/utilities/constant';
+import { UserInterface } from '@/core/ts/interfaces/DataInterfaces';
 
 import Main from '@/layouts/Main';
 
@@ -16,39 +17,67 @@ export const Booking = () => {
    const [error, setError] = useState(null);
    const [loading, setLoading] = useState(true);
    const [commentLoading, setCommentLoading] = useState(true);
+   const ownerData: UserInterface = {
+      id: 666,
+      name: 'A. D. Afasyah',
+      username: 'afasyah',
+      email: 'alifya.difa707@gmail.com',
+      phone: '1-770-736-8031',
+      website: 'https://www.linkedin.com/in/adafasyah/',
+   };
 
    useEffect(() => {
-      axios
-         .get(`${API.POSTS}/${params.id}`)
-         .then((res) => {
-            setPost(res.data);
-
-            axios
-               .get(`${API.USERS}/${res.data.userId}`)
-               .then((res) => {
-                  setUser(res.data);
-                  setLoading(false);
-               })
-               .catch((err) => {
-                  setError(err);
-                  setLoading(false);
-               });
-
-            axios
-               .get(`${API.POSTS}/${res.data.id}/${API.COMMENTS}`)
-               .then((res) => {
-                  setComments(res.data);
-                  setCommentLoading(false);
-               })
-               .catch((err) => {
-                  setError(err);
-                  setCommentLoading(false);
-               });
-         })
-         .catch((err) => {
-            setError(err);
-            setLoading(false);
+      if (params.id === '101') {
+         setPost({
+            id: 101,
+            userId: 666,
+            title: 'Tribute to Kresselyn',
+            body: 'This website is a tribute to my dear friend, Kresselyn. May god bless her undefined existence.',
          });
+         setUser(ownerData);
+         setComments([
+            {
+               postId: 101,
+               id: 666,
+               email: 'A. D. Afasyah',
+               body: 'Thank you for your kind support and motivation.',
+            },
+         ]);
+         setLoading(false);
+         setCommentLoading(false);
+      } else {
+         axios
+            .get(`${API.POSTS}/${params.id}`)
+            .then((res) => {
+               setPost(res.data);
+
+               axios
+                  .get(`${API.USERS}/${res.data.userId}`)
+                  .then((res) => {
+                     setUser(res.data);
+                     setLoading(false);
+                  })
+                  .catch((err) => {
+                     setError(err);
+                     setLoading(false);
+                  });
+
+               axios
+                  .get(`${API.POSTS}/${res.data.id}/${API.COMMENTS}`)
+                  .then((res) => {
+                     setComments(res.data);
+                     setCommentLoading(false);
+                  })
+                  .catch((err) => {
+                     setError(err);
+                     setCommentLoading(false);
+                  });
+            })
+            .catch((err) => {
+               setError(err);
+               setLoading(false);
+            });
+      }
    }, []);
 
    return (

@@ -1,11 +1,15 @@
 import React, { FormEvent, useState } from 'react';
 
-export const ModalBooking = ({ active, closeModal, onSubmit }: any) => {
+export const ModalBooking = ({
+   active,
+   loading,
+   closeModal,
+   onSubmit,
+}: any) => {
    const [content, setContent] = useState('');
 
-   const handleInputContent = (_e: FormEvent<HTMLTextAreaElement>) => {
-      // setContent(_e.target);
-      console.log(_e);
+   const handleInputContent = (_e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setContent(_e.target.value);
    };
 
    return (
@@ -20,31 +24,47 @@ export const ModalBooking = ({ active, closeModal, onSubmit }: any) => {
 
             <div className="modal__profile">
                <img
-                  src="/images/afasyah.jpg"
+                  src="/images/pp-666.png"
                   alt="Alifya Difa Afasyah"
                   width={120}
                   height={120}
                />
 
                <h4>A. D. Afasyah</h4>
-               <a href="https://www.linkedin.com/in/adafasyah">
+               <a
+                  href="https://www.linkedin.com/in/adafasyah"
+                  target={'_blank'}
+                  rel="noreferrer">
                   linkedin.com/in/adafasyah
                </a>
             </div>
 
             <div className="modal__text-box">
                <textarea
-                  value={content}
                   rows={10}
                   draggable={false}
-                  onInput={handleInputContent}></textarea>
+                  onChange={handleInputContent}></textarea>
             </div>
 
             <div className="modal__actions">
                <button
                   className="button--color-primary button--large button--full"
+                  disabled={loading}
                   onClick={() => onSubmit(content)}>
-                  Submit
+                  {loading ? (
+                     <div className="lds-roller">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                     </div>
+                  ) : (
+                     'Submit'
+                  )}
                </button>
             </div>
 
