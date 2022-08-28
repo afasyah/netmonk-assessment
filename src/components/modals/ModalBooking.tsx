@@ -41,7 +41,7 @@ export const ModalBooking = ({
 
             <div className="modal__text-box">
                <textarea
-                  rows={10}
+                  rows={7}
                   draggable={false}
                   onChange={handleInputContent}></textarea>
             </div>
@@ -51,20 +51,7 @@ export const ModalBooking = ({
                   className="button--color-primary button--large button--full"
                   disabled={loading}
                   onClick={() => onSubmit(content)}>
-                  {loading ? (
-                     <div className="lds-roller">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                     </div>
-                  ) : (
-                     'Submit'
-                  )}
+                  {loading ? 'Loading...' : 'Submit'}
                </button>
             </div>
 
