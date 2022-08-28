@@ -32,7 +32,12 @@ export const Home = () => {
                <motion.button
                   variants={MOTION_ITEM}
                   className="button button--color-primary button--large"
-                  onClick={() => navigate('/booking')}>
+                  onClick={() =>
+                     navigate({
+                        pathname: '/booking',
+                        search: '?form=true',
+                     })
+                  }>
                   Book Now
                </motion.button>
             </div>

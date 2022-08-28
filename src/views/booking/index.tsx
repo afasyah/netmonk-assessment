@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-import { MOTION_CONTAINER, MOTION_ITEM } from '@/utilities/constant';
 import fetchData from '@/core/hooks/fetchData';
+import { MOTION_CONTAINER, MOTION_ITEM } from '@/utilities/constant';
 import { API } from '@/utilities/constant';
 import {
    PostInterface,
@@ -11,8 +12,11 @@ import {
 
 import Main from '@/layouts/Main';
 import PostBubble from '@/components/booking/PostBubble';
+import ModalBooking from '@/components/modals/ModalBooking';
 
 export const BookingList = () => {
+   const location = useLocation();
+   const [modalBookingActive, setModalBookingActive] = useState(false);
    const {
       data: posts,
       error: postError,
@@ -23,6 +27,29 @@ export const BookingList = () => {
       error: userError,
       loading: userLoading,
    } = fetchData(API.USERS);
+
+   useEffect(() => {
+      const queries = location.search
+         .split('?')
+         .slice(1)
+         .map((q) => {
+            const splittedQuery = q.split('=');
+
+            return { [splittedQuery[0]]: splittedQuery[1] };
+         });
+
+      queries.map((query) => {
+         if (query.form === 'true') toggleBookingModal(true);
+      });
+   }, []);
+
+   const toggleBookingModal = (val: boolean) => {
+      setModalBookingActive(val);
+   };
+
+   const onSubmitBooking = (payload: any) => {
+      //
+   };
 
    return (
       <Main>
@@ -75,6 +102,12 @@ export const BookingList = () => {
                )}
             </div>
          </div>
+
+         <ModalBooking
+            active={modalBookingActive}
+            closeModal={() => toggleBookingModal(false)}
+            onSubmit={onSubmitBooking}
+         />
       </Main>
    );
 };

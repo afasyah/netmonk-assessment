@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { useParams } from 'react-router-dom';
 import axios from '@/core/services/axios';
 
-import fetchData from '@/core/hooks/fetchData';
 import { API } from '@/utilities/constant';
 import { MOTION_CONTAINER, MOTION_ITEM } from '@/utilities/constant';
 
@@ -11,10 +10,12 @@ import Main from '@/layouts/Main';
 
 export const Booking = () => {
    const params = useParams();
-   const [loading, setLoading] = useState(true);
    const [post, setPost] = useState(null);
+   const [comments, setComments] = useState(null);
    const [user, setUser] = useState(null);
    const [error, setError] = useState(null);
+   const [loading, setLoading] = useState(true);
+   const [commentLoading, setCommentLoading] = useState(true);
 
    useEffect(() => {
       axios
@@ -29,7 +30,19 @@ export const Booking = () => {
                   setLoading(false);
                })
                .catch((err) => {
+                  setError(err);
                   setLoading(false);
+               });
+
+            axios
+               .get(`${API.POSTS}/${res.data.id}/${API.COMMENTS}`)
+               .then((res) => {
+                  setComments(res.data);
+                  setCommentLoading(false);
+               })
+               .catch((err) => {
+                  setError(err);
+                  setCommentLoading(false);
                });
          })
          .catch((err) => {
@@ -55,7 +68,9 @@ export const Booking = () => {
                            <motion.h2
                               variants={MOTION_ITEM}
                               className="content__title">
-                              {user.name}
+                              {user.name.length > 16
+                                 ? user.name.slice(0, 16) + '...'
+                                 : user.name}
                            </motion.h2>
                            <motion.p variants={MOTION_ITEM}>
                               a week ago
@@ -64,7 +79,8 @@ export const Booking = () => {
                         <img
                            src={`/images/pp-${user.id}.png`}
                            alt="pp"
-                           width={96}
+                           width={84}
+                           height={84}
                         />
                      </div>
                   </div>
@@ -79,6 +95,33 @@ export const Booking = () => {
                         {post.body}
                      </motion.p>
                   </motion.div>
+               </div>
+
+               <div className="comment">
+                  {commentLoading && 'Fetching comments...'}
+                  {comments && (
+                     <motion.div
+                        variants={MOTION_CONTAINER}
+                        initial="hidden"
+                        animate="show">
+                        {comments.map((comment: any) => (
+                           <motion.div
+                              key={comment.id}
+                              variants={MOTION_ITEM}
+                              className="comment-item">
+                              <div className="comment-item__content">
+                                 <p className="comment-item__title">
+                                    {comment.email}
+                                 </p>
+
+                                 <p className="comment-item__body">
+                                    {comment.body}
+                                 </p>
+                              </div>
+                           </motion.div>
+                        ))}
+                     </motion.div>
+                  )}
                </div>
             </div>
          )}
