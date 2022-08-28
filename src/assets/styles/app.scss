@@ -114,7 +114,13 @@ button,
 
 .navbar {
    &__header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999999;
       padding: 16px 32px;
+      background-color: #fff;
+      width: 100%;
       box-shadow: 0px -20px 39px 5px rgba(36, 36, 36, 0.25);
 
       &-list {
@@ -148,11 +154,12 @@ button,
 
 .main-content {
    height: 100%;
+   padding-top: 89.6px;
 
    &__wrapper {
       min-height: 75vh;
       padding: 24px 32px;
-      padding-top: 128px;
+      padding-top: 10%;
       max-width: 50%;
       min-width: 50%;
    }
@@ -242,6 +249,7 @@ button,
       overflow:hidden;
       position: relative;
       width: auto;
+      margin-top: 84px;
    }
 
    &__title {
