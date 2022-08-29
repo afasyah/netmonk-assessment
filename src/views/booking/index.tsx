@@ -27,7 +27,7 @@ export const BookingList = () => {
          queries.map((query) => {
             if (query.form === 'true') toggleBookingModal(true);
          });
-   }, []);
+   }, [window.stringQueries]);
 
    const toggleBookingModal = (val: boolean) => {
       setModalBookingActive(val);
