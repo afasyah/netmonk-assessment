@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 
 import axios from '@/core/services/axios';
 import fetchData from '@/core/hooks/fetchData';
@@ -15,19 +16,27 @@ import PostBubble from '@/components/booking/PostBubble';
 import ModalBooking from '@/components/modals/ModalBooking';
 
 export const BookingList = () => {
+   const location = useLocation();
    const [modalBookingActive, setModalBookingActive] = useState(false);
    const [modalBookingLoading, setModalBookingLoading] = useState(false);
    const { data: posts, error: postError } = fetchData(API.POSTS);
    const { data: users, error: userError } = fetchData(API.USERS);
 
    useEffect(() => {
-      const queries = window.stringQueries;
+      const queries = location.search
+         .split('?')
+         .slice(1)
+         .map((q) => {
+            const splittedQuery = q.split('=');
+
+            return { [splittedQuery[0]]: splittedQuery[1] };
+         });
 
       if (queries)
          queries.map((query) => {
             if (query.form === 'true') toggleBookingModal(true);
          });
-   }, [window.stringQueries]);
+   }, []);
 
    const toggleBookingModal = (val: boolean) => {
       setModalBookingActive(val);
