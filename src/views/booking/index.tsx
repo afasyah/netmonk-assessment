@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 import axios from '@/core/services/axios';
 import fetchData from '@/core/hooks/fetchData';
 import { MOTION_CONTAINER, MOTION_ITEM } from '@/utilities/constant';
-import { API } from '@/utilities/constant';
+import { API, OWNER_DATA } from '@/utilities/constant';
 import {
    PostInterface,
    UserInterface,
@@ -16,66 +15,42 @@ import PostBubble from '@/components/booking/PostBubble';
 import ModalBooking from '@/components/modals/ModalBooking';
 
 export const BookingList = () => {
-   const location = useLocation();
    const [modalBookingActive, setModalBookingActive] = useState(false);
    const [modalBookingLoading, setModalBookingLoading] = useState(false);
-   const {
-      data: posts,
-      error: postError,
-      loading: postLoading,
-   } = fetchData(API.POSTS);
-   const {
-      data: users,
-      error: userError,
-      loading: userLoading,
-   } = fetchData(API.USERS);
-   const ownerData: UserInterface = {
-      id: 666,
-      name: 'A. D. Afasyah',
-      username: 'afasyah',
-      email: 'alifya.difa707@gmail.com',
-      phone: '1-770-736-8031',
-      website: 'https://www.linkedin.com/in/adafasyah/',
-   };
+   const { data: posts, error: postError } = fetchData(API.POSTS);
+   const { data: users, error: userError } = fetchData(API.USERS);
 
    useEffect(() => {
-      const queries = location.search
-         .split('?')
-         .slice(1)
-         .map((q) => {
-            const splittedQuery = q.split('=');
+      const queries = window.stringQueries;
 
-            return { [splittedQuery[0]]: splittedQuery[1] };
+      if (queries)
+         queries.map((query) => {
+            if (query.form === 'true') toggleBookingModal(true);
          });
-
-      queries.map((query) => {
-         if (query.form === 'true') toggleBookingModal(true);
-      });
    }, []);
 
    const toggleBookingModal = (val: boolean) => {
       setModalBookingActive(val);
    };
 
-   const onSubmitBooking = (payload: any) => {
+   const onSubmitBooking = async (payload: string) => {
       setModalBookingLoading(true);
 
-      axios
-         .post(API.POSTS, {
+      try {
+         const { data } = await axios.post(API.POSTS, {
             id: 101,
             title: 'Booking for Afasyah',
             body: payload,
-            userId: 666,
-         })
-         .then((res) => {
-            posts.push(res.data);
-            setModalBookingLoading(false);
-            toggleBookingModal(false);
-         })
-         .catch((err) => {
-            console.error(err);
-            setModalBookingLoading(false);
+            userId: OWNER_DATA.id,
          });
+
+         posts.push(data);
+         setModalBookingLoading(false);
+         toggleBookingModal(false);
+      } catch (error) {
+         console.error(error);
+         setModalBookingLoading(false);
+      }
    };
 
    return (
@@ -110,7 +85,7 @@ export const BookingList = () => {
                      className="post-bubble__wrapper">
                      {posts
                         .filter(
-                           (post: any, index: number) =>
+                           (post: PostInterface, index: number) =>
                               index === 0 ||
                               index === 10 ||
                               index === 20 ||
@@ -124,7 +99,7 @@ export const BookingList = () => {
                                  post={Object.assign({}, post, { index: i })}
                                  user={
                                     post.userId === 666
-                                       ? ownerData
+                                       ? OWNER_DATA
                                        : users.find(
                                             (data: UserInterface) =>
                                                data.id === post.userId,

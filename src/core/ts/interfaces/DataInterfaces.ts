@@ -6,6 +6,14 @@ export interface PostInterface {
    body: string;
 }
 
+export interface CommentInterface {
+   postId: number;
+   id: number;
+   name: string;
+   email: string;
+   body: string;
+}
+
 export interface UserInterface {
    id: number;
    name: string;
@@ -28,4 +36,8 @@ export interface UserInterface {
       catchPhrase: string;
       bs: string;
    };
+}
+
+export interface StringQueriesInterface {
+   [key: string]: string;
 }
