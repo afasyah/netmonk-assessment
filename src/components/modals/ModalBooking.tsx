@@ -1,11 +1,13 @@
-import React, { FormEvent, useState } from 'react';
+import React, { useState } from 'react';
+
+import { ModalBookingPropsInterface } from '@/core/ts/interfaces/PropsInterface';
 
 export const ModalBooking = ({
    active,
    loading,
    closeModal,
    onSubmit,
-}: any) => {
+}: ModalBookingPropsInterface) => {
    const [content, setContent] = useState('');
 
    const handleInputContent = (_e: React.ChangeEvent<HTMLTextAreaElement>) => {

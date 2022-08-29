@@ -3,9 +3,17 @@ import { motion } from 'framer-motion';
 import { useParams } from 'react-router-dom';
 import axios from '@/core/services/axios';
 
-import { API } from '@/utilities/constant';
+import {
+   API,
+   OWNER_DATA,
+   NEW_POST,
+   NEW_POST_COMMENTS,
+} from '@/utilities/constant';
 import { MOTION_CONTAINER, MOTION_ITEM } from '@/utilities/constant';
-import { UserInterface } from '@/core/ts/interfaces/DataInterfaces';
+import {
+   CommentInterface,
+   UserInterface,
+} from '@/core/ts/interfaces/DataInterfaces';
 
 import Main from '@/layouts/Main';
 
@@ -17,66 +25,40 @@ export const Booking = () => {
    const [error, setError] = useState(null);
    const [loading, setLoading] = useState(true);
    const [commentLoading, setCommentLoading] = useState(true);
-   const ownerData: UserInterface = {
-      id: 666,
-      name: 'A. D. Afasyah',
-      username: 'afasyah',
-      email: 'alifya.difa707@gmail.com',
-      phone: '1-770-736-8031',
-      website: 'https://www.linkedin.com/in/adafasyah/',
-   };
+   const ownerData: UserInterface = OWNER_DATA;
 
    useEffect(() => {
+      async function fetchBooking() {
+         try {
+            const { data: post } = await axios.get(`${API.POSTS}/${params.id}`);
+            setPost(post);
+
+            const { data: user } = await axios.get(
+               `${API.USERS}/${post.userId}`,
+            );
+            setUser(user);
+            setLoading(false);
+
+            const { data: comments } = await axios.get(
+               `${API.POSTS}/${post.id}/${API.COMMENTS}`,
+            );
+            setComments(comments);
+            setCommentLoading(false);
+         } catch (error) {
+            setError(error);
+            setLoading(false);
+            setCommentLoading(false);
+         }
+      }
+
       if (params.id === '101') {
-         setPost({
-            id: 101,
-            userId: 666,
-            title: 'Tribute to Kresselyn',
-            body: 'This website is a tribute to my dear friend, Kresselyn. May god bless her undefined existence.',
-         });
+         setPost(NEW_POST);
          setUser(ownerData);
-         setComments([
-            {
-               postId: 101,
-               id: 666,
-               email: 'A. D. Afasyah',
-               body: 'Thank you for your kind support and motivation.',
-            },
-         ]);
+         setComments(NEW_POST_COMMENTS);
          setLoading(false);
          setCommentLoading(false);
       } else {
-         axios
-            .get(`${API.POSTS}/${params.id}`)
-            .then((res) => {
-               setPost(res.data);
-
-               axios
-                  .get(`${API.USERS}/${res.data.userId}`)
-                  .then((res) => {
-                     setUser(res.data);
-                     setLoading(false);
-                  })
-                  .catch((err) => {
-                     setError(err);
-                     setLoading(false);
-                  });
-
-               axios
-                  .get(`${API.POSTS}/${res.data.id}/${API.COMMENTS}`)
-                  .then((res) => {
-                     setComments(res.data);
-                     setCommentLoading(false);
-                  })
-                  .catch((err) => {
-                     setError(err);
-                     setCommentLoading(false);
-                  });
-            })
-            .catch((err) => {
-               setError(err);
-               setLoading(false);
-            });
+         fetchBooking();
       }
    }, []);
 
@@ -133,7 +115,7 @@ export const Booking = () => {
                         variants={MOTION_CONTAINER}
                         initial="hidden"
                         animate="show">
-                        {comments.map((comment: any) => (
+                        {comments.map((comment: CommentInterface) => (
                            <motion.div
                               key={comment.id}
                               variants={MOTION_ITEM}
